@@ -9,6 +9,9 @@
     "prisma:migrate": "prisma migrate dev --name init",
     "seed": "node prisma/seed.js"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
