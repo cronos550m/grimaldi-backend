@@ -17,17 +17,19 @@ model User {
 }
 
 model Service {
-  id        Int      @id @default(autoincrement())
-  title_es  String?
-  title_en  String?
-  desc_es   String?
-  desc_en   String?
-  image     String?
-  order     Int?     @default(0)
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  title_es     String?
+  title_en     String?
+  desc_es      String?
+  desc_en      String?
+  image        String?
+  image_mobile String?   // NUEVO campo para imagen mobile
+  order        Int?     @default(0)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
+
 
 model Flota {
   id        Int      @id @default(autoincrement())
