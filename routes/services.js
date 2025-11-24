@@ -4,7 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const auth = require("../middleware/auth");
 
-// public read
+// público: lista de servicios activos
 router.get("/", async (req, res, next) => {
   try {
     const items = await prisma.service.findMany({
@@ -17,19 +17,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// admin: list all (por si lo querés distinto, pero con el GET / ya alcanza)
-router.get("/all", auth, async (req, res, next) => {
-  try {
-    const items = await prisma.service.findMany({
-      orderBy: { order: "asc" },
-    });
-    res.json(items);
-  } catch (e) {
-    next(e);
-  }
-});
-
-// admin create
+// admin: crear servicio
 router.post("/", auth, async (req, res, next) => {
   try {
     const {
@@ -60,10 +48,10 @@ router.post("/", auth, async (req, res, next) => {
   }
 });
 
-// admin update
+// admin: actualizar servicio
 router.put("/:id", auth, async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id, 10);
     const {
       title,
       description,
@@ -93,10 +81,10 @@ router.put("/:id", auth, async (req, res, next) => {
   }
 });
 
-// delete
+// admin: borrar servicio
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.id, 10);
     await prisma.service.delete({ where: { id } });
     res.json({ ok: true });
   } catch (e) {
